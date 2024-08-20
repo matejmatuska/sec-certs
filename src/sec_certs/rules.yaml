@@ -1008,6 +1008,44 @@ os_name:
   JCOP:
     - "JCOP[ ]*[0-9]"
 
+cpu_architecture:
+  Intel:
+    Pentium:
+      - "(Intel(?:\\\\(R\\\\))? )Pentium( \\d)?"
+    Itanium:
+      - "(Intel(?:\\\\(R\\\\))? )Itanium"
+    Xeon:
+      # should be safe to assume it won't match any other XEON
+      Silver:
+        - "(Intel(?:\\(R\\))? )?Xeon(?:\\(R\\))? Silver( 4([0-9a-z]){3}[YTR]?\\+?)?( Processor)?"
+      Gold:
+        - "Intel(?:\\(R\\)| ?®)?(?: Cascade Lake)? X(eon|EON)(?:\\(R\\)|®)? Gold ?(6\\d{3}[RN]?|5\\d{3}T?)?"
+      Platinum:
+        - "(Intel(?:\\(R\\)| ?®)? )?(?:Cascade Lake |Skylake )?X(eon|EON)(?:\\(R\\)|®)? Platinum ?(8[0-9]{3}[a-zA-Z]{0,2})?"
+  AMD:
+    ROME:
+     - "(AMD(®|\\(R\\))? )?(Rome)(\\(TM\\))?"
+    OPTERON:
+       - "(AMD(®|\\(R\\))? )?O(pteron|PTERON)( A1100)?(\\(TM\\))?"
+    EPYC:
+       - "(AMD(?:®|\\(R\\))? )?EPYC( \\d{4}P?)?(?:®|\\(R\\)| ?\\(TM\\))?"
+    A4:
+      - "(AMD(®|\\(R\\))? )?(A4)(\\(TM\\))?"
+    Ryzen: # TODO separate out PROs?
+      - "(AMD(®|\\(R\\))? )?(Ryzen (PRO)? \\d{4}([GUH]E?)?)(\\(TM\\))?"
+    GSERIES:
+      - "(AMD(®|\\(R\\))? )?(R-Series RX\\-2\\d{2})(\\(TM\\))?"
+    RSERIES:
+    - "(AMD(®|\\(R\\))? )?(G-Series GX\\-2\\d{2})(\\(TM\\))?"
+  IBM_Z:
+    zEnterprise:
+    - "(IBM®? )?(z(Enterprise |Series)(TM|\\(TM\\)|) (z?EC12|BC12|196|114)?)?\\(?z/?196®?\\)?((?: \\(TM\\))? Enterprise Class \\(z1[0-9] EC\\))?"
+    z:
+    - "(IBM®? )?(zSeries |(?:Z )?System )?\\(?[zZ](/?1[0-9]®?\\)?)?((?: \\(TM\\))? Enterprise Class \\(z1[0-9] EC\\))?"
+  POWER:
+    - "(IBM®? )?(?:[0-9]{4}-[a-zA-Z0-9]{3})?P(?:ower|OWER)(?: System )?( ?[0-9]{1,2}\\+?|( (?:[0-9]{2,3}))|([SE][0-9]{3}))(?: Express)?"
+
+
 #####
 # CPLC data name..
 #####
@@ -1234,6 +1272,7 @@ cc_rules:
   - "device_model"
   - "tee_name"
   - "os_name"
+  - "cpu_architecture"
   - "cplc_data"
   - "ic_data_group"
   - "standard_id"
